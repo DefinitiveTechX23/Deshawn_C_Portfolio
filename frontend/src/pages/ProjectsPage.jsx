@@ -1,318 +1,186 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send, Clock, MessageCircle } from "lucide-react"
-import Navbar from "@/components/navbar"
 
-export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+export default function ProjectsPage() {
+  const [activeFilter, setActiveFilter] = useState("All")
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
-    console.log("Form submitted:", formData)
-    setIsSubmitting(false)
-
-    // Reset form
-    setFormData({ name: "", email: "", subject: "", message: "" })
-
-    // You would typically send this data to your backend here
-    alert("Thank you for your message! I'll get back to you soon.")
-  }
-
-  const contactInfo = [
+  const projects = [
+   {
+  id: 1,
+  title: "About Me Page",
+  description:
+    "My first web development project built during the foundations portion of my bootcamp fellowship at The Knowledge House. A personal introduction page showcasing HTML structure and CSS styling fundamentals.",
+  image: "/personal-about-me-webpage-with-clean-design.png",
+  category: "HTML/CSS",
+  technologies: ["HTML5", "CSS3"],
+  status: "Completed",
+  link: "https://rainbow-belekoy-1713ae.netlify.app/",
+},
+   {
+  id: 2,
+  title: "Flash Feast",
+  description:
+    "A concept app developed for the Bloomberg hackathon focused on healthy eating. The app helps users create quick meals with ingredients they have at home and suggests healthier ingredient alternatives to promote better nutrition.",
+  image: "/healthy-eating-mobile-app-interface-with-food-sugg.png",
+  category: "App Concept",
+  technologies: ["UI/UX Design", "Concept Development"],
+  status: "Completed",
+  link: "https://www.figma.com/design/6fOXZb5Ld7Sbn9tfhfzPQw/Flash-Feast-APP-HI-FI-Mock-Up?node-id=0-1&t=JWjirdGXFM12xvHL-1",
+},
     {
-      icon: Mail,
-      title: "Email",
-      value: "hello@yourname.com",
-      description: "Send me an email anytime",
-      href: "mailto:hello@yourname.com",
-    },
-    {
-      icon: Phone,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      description: "Call me during business hours",
-      href: "tel:+15551234567",
-    },
-    {
-      icon: MapPin,
-      title: "Location",
-      value: "San Francisco, CA",
-      description: "Available for local meetings",
-      href: "https://maps.google.com/?q=San+Francisco,CA",
-    },
+  id: 3,
+  title: "Project Pokedex API Project",
+  description:
+    "An interactive Pokemon search application that fetches data from the Pokemon API. Users can search for any Pokemon by name to view their sprite image and hear their unique cry sound, creating an engaging Pokemon discovery experience.",
+  image: "/pokemon-search-app-interface-with-pokemon-sprites.png",
+  category: "JavaScript",
+  technologies: ["HTML", "CSS", "JavaScript", "Pokemon API"],
+  status: "Completed",
+  link: "https://pokedexproject23.netlify.app/",
+}
   ]
 
+  const categories = ["All", "HTML/CSS", "JavaScript", "App Concept"]
+
+  const filteredProjects =
+    activeFilter === "All" ? projects : projects.filter((project) => project.category === activeFilter)
+
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-
+    <div className="w-full bg-gradient-to-br from-orange-500 via-cyan-200 to-orange-400">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-background via-primary/5 to-secondary/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
-            Get In <span className="text-primary">Touch</span>
+      <section className="pt-20 pb-16 px-4 sm:px-8 lg:px-16 xl:px-24 min-h-screen flex items-center">
+        <div className="w-full text-center">
+          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6">
+            My <span className="text-orange-500">Portfolio</span> Projects
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Have a project in mind or just want to chat? I'd love to hear from you. Let's discuss how we can work
-            together to bring your ideas to life.
+          <p className="text-xl lg:text-2xl text-gray-700">
+            Here are the projects I've built during my web development journey, from bootcamp foundations to hackathon
+            concepts and API integrations.
           </p>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div>
-              <Card className="border-border">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-foreground flex items-center gap-2">
-                    <MessageCircle className="h-6 w-6 text-primary" />
-                    Send a Message
-                  </CardTitle>
-                  <p className="text-muted-foreground">
-                    Fill out the form below and I'll get back to you as soon as possible.
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name" className="text-foreground">
-                          Name *
-                        </Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                          className="border-border focus:border-primary focus:ring-primary"
-                          placeholder="Your full name"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="text-foreground">
-                          Email *
-                        </Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          className="border-border focus:border-primary focus:ring-primary"
-                          placeholder="your.email@example.com"
-                        />
-                      </div>
-                    </div>
+      {/* Filter Buttons */}
+      <section className="pb-12 px-4 sm:px-8 lg:px-16 xl:px-24">
+        <div className="w-full">
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveFilter(category)}
+                className={`px-6 py-3 rounded-full font-medium transition-all ${
+                  activeFilter === category
+                    ? "bg-gradient-to-r from-orange-500 to-cyan-500 text-white shadow-lg"
+                    : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="subject" className="text-foreground">
-                        Subject *
-                      </Label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleInputChange}
-                        required
-                        className="border-border focus:border-primary focus:ring-primary"
-                        placeholder="What's this about?"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message" className="text-foreground">
-                        Message *
-                      </Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        required
-                        rows={6}
-                        className="border-border focus:border-primary focus:ring-primary resize-none"
-                        placeholder="Tell me about your project or what you'd like to discuss..."
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-primary hover:bg-primary/90 text-lg py-6"
+      {/* Projects Grid */}
+      <section className="pb-20 px-4 sm:px-8 lg:px-16 xl:px-24">
+        <div className="w-full">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+            {filteredProjects.map((project) => (
+              <div
+                key={project.id}
+                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-300"
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 right-4">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        project.status === "Completed"
+                          ? "bg-green-100 text-green-700"
+                          : project.status === "In Progress"
+                            ? "bg-orange-100 text-orange-700"
+                            : "bg-cyan-100 text-cyan-700"
+                      }`}
                     >
-                      {isSubmitting ? (
-                        "Sending..."
-                      ) : (
-                        <>
-                          Send Message <Send className="ml-2 h-5 w-5" />
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-6">Let's Connect</h2>
-                <p className="text-muted-foreground leading-relaxed mb-8">
-                  I'm always open to discussing new opportunities, creative projects, or just having a friendly chat
-                  about technology and design. Choose the method that works best for you.
-                </p>
-              </div>
-
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <Card key={index} className="border-border hover:border-secondary/50 transition-colors duration-300">
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <info.icon className="h-6 w-6 text-secondary" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-foreground mb-1">{info.title}</h3>
-                          <a
-                            href={info.href}
-                            className="text-primary hover:text-primary/80 font-medium transition-colors duration-200"
-                          >
-                            {info.value}
-                          </a>
-                          <p className="text-muted-foreground text-sm mt-1">{info.description}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Availability */}
-              <Card className="border-border bg-gradient-to-br from-primary/5 to-secondary/5">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Clock className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-2">Availability</h3>
-                      <div className="space-y-1 text-sm text-muted-foreground">
-                        <p>Monday - Friday: 9:00 AM - 6:00 PM PST</p>
-                        <p>Weekend: Available for urgent projects</p>
-                        <p className="text-primary font-medium mt-2">Currently accepting new projects</p>
-                      </div>
-                    </div>
+                      {project.status}
+                    </span>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+
+                <div className="p-6">
+                  <div className="mb-3">
+                    <span className="text-sm font-medium text-cyan-600 bg-cyan-200 px-3 py-1 rounded-full">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-600 mb-4 line-clamp-3">{project.description}</p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, index) => (
+                      <span key={index} className="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <a
+                      href={project.link}
+                      className="inline-flex items-center text-orange-600 hover:text-orange-700 font-medium"
+                    >
+                      View Project
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Learning Progress */}
+      <section className="py-16 lg:py-24 px-4 sm:px-8 lg:px-16 xl:px-24 bg-gradient-to-r from-orange-500 to-cyan-300">
+        <div className="w-full text-center">
+          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-8">
+            Current Learning <span className="text-cyan-500">Focus</span>
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <div className="bg-white rounded-xl p-6 shadow-lg">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Next Projects</h3>
+              <ul className="text-left space-y-2 text-gray-600">
+                <li>• React Portfolio Enhancement</li>
+                <li>• Full-Stack Web Application</li>
+                <li>• Advanced API Integration Projects</li>
+                <li>• Interactive JavaScript Games</li>
+              </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 bg-card/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-muted-foreground">Quick answers to common questions</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="border-border">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground mb-3">What's your typical response time?</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  I usually respond to emails within 24 hours during business days. For urgent matters, feel free to
-                  call directly.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground mb-3">Do you work with international clients?</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  I work with clients worldwide and am comfortable with different time zones and communication
-                  preferences.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground mb-3">What information should I include?</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Please include your project timeline, budget range, and any specific requirements or technologies you
-                  prefer.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground mb-3">Do you offer free consultations?</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Yes! I offer a free 30-minute consultation to discuss your project and see if we're a good fit to work
-                  together.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">Ready to Get Started?</h2>
-          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Don't hesitate to reach out. I'm here to help bring your ideas to life and create something amazing
-            together.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90">
-              <a href="mailto:hello@yourname.com">
-                Send Email <Mail className="ml-2 h-5 w-5" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-            >
-              <a href="tel:+15551234567">Call Now</a>
-            </Button>
+            <div className="bg-white rounded-xl p-6 shadow-lg">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Skills I'm Developing</h3>
+              <ul className="text-left space-y-2 text-gray-600">
+                <li>• React Components and Hooks</li>
+                <li>• Modern JavaScript (ES6+)</li>
+                <li>• API Integration and Fetch</li>
+                <li>• Responsive Web Design</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>

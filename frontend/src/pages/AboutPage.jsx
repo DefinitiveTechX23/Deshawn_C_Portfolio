@@ -1,12 +1,12 @@
 export default function AboutPage() {
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-orange-500 via-blue-600 to-orange-100 text-gray-900">
+    <div className="w-full min-h-screen bg-gradient-to-br from-orange-300 via-cyan-500 to-orange-500 text-gray-900">
       {/* Hero Section */}
       <section className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8">
         <div className="w-full grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              About <span className="text-blue-700">Deshawn Curtis</span>
+              About <span className="text-sky-500">Deshawn Curtis</span>
             </h1>
             <p className="text-xl leading-relaxed">
               I'm a passionate web developer on an exciting journey of learning and growth. Currently mastering the
@@ -132,7 +132,7 @@ export default function AboutPage() {
               icon: "⚛️",
             },
             {
-              title: "Build Projects",
+              title: "Build and Create Projects",
               description: "Create a portfolio of diverse projects that showcase my growing skills and creativity.",
               icon: "🚀",
             },

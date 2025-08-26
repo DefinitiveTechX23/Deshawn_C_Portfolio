@@ -132,7 +132,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900">Email</h3>
-                    <p className="text-gray-600">deshawn.curtis@email.com</p>
+                    <p className="text-gray-600">curtis.deshawn@ymail.com</p>
                   </div>
                 </div>
 
@@ -155,7 +155,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900">Location</h3>
-                    <p className="text-gray-600">Available for remote opportunities</p>
+                    <p className="text-gray-600">Available for local and remote opportunities</p>
                   </div>
                 </div>
 
@@ -172,7 +172,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900">Response Time</h3>
-                    <p className="text-gray-600">Usually within 24 hours</p>
+                    <p className="text-gray-600">Usually within 24 to 48 hours</p>
                   </div>
                 </div>
               </div>
