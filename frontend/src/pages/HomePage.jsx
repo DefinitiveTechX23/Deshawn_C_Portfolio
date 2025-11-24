@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Code, Palette, Zap } from "lucide-react";
+import { ArrowRight, Code, Palette, Zap, Globe } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -16,8 +16,8 @@ export default function HomePage() {
               a Software <span className="text-secondary">Developer</span>
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              My goal is to create cool, functional, as well as aesthetically pleasing digital experiences and applications. Currently on a journey to master HTML, CSS,
-              JavaScript, and React to build amazing digital creations.
+              My goal is to create cool, functional, as well as aesthetically pleasing digital experiences and applications.
+              Currently on a journey to master HTML, CSS, JavaScript, React, and Next.js to build amazing digital creations.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-6">
@@ -48,25 +48,29 @@ export default function HomePage() {
       <section className="py-24 bg-gradient-to-r from-card via-background to-card w-full bg-sky-300">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">What I'm Learning, Creating, & Coding</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              What I'm Learning, Creating, & Coding
+            </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Developing skills in modern web technologies to create exceptional user experiences you won't find anywhere else
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 w-full">
+          <div className="grid md:grid-cols-4 gap-8 w-full">
+            {/* Full Stack Development */}
             <Card className="border-border hover:border-primary/50 transition-colors duration-300 bg-card/80 backdrop-blur-sm ">
               <CardContent className="p-8 text-center ">
                 <div className="w-16 h-16 bg-primary/15 rounded-full flex items-center justify-center mx-auto mb-6 bg-sky-300">
                   <Code className="h-8 w-8 text-primary bg-sky-300" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-4 bg-sky-300">Frontend Development</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-4 bg-sky-300">Full Stack Development</h3>
                 <p className="text-muted-foreground leading-relaxed bg-sky-300">
                   Mastering HTML, CSS, and JavaScript fundamentals while building responsive, interactive web applications.
                 </p>
               </CardContent>
             </Card>
 
+            {/* React Development */}
             <Card className="border-border hover:border-secondary/50 transition-colors duration-300 bg-card/80 backdrop-blur-sm">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-secondary/15 rounded-full flex items-center justify-center mx-auto mb-6 bg-sky-300">
@@ -78,7 +82,19 @@ export default function HomePage() {
                 </p>
               </CardContent>
             </Card>
-
+            {/* Next.js Learning */}
+            <Card className="border-border hover:border-primary/50 transition-colors duration-300 bg-card/80 backdrop-blur-sm">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-primary/15 rounded-full flex items-center justify-center mx-auto mb-6 bg-sky-300">
+                  <Globe className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-4 bg-sky-300">Next.js</h3>
+                <p className="text-muted-foreground leading-relaxed bg-sky-300">
+                  Expanding my React skills with Next.js to build fast, scalable, and SEO-friendly applications.
+                </p>
+              </CardContent>
+            </Card>
+            {/* Modern Web Tools */}
             <Card className="border-border hover:border-primary/50 transition-colors duration-300 bg-card/80 backdrop-blur-sm">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-accent/15 rounded-full flex items-center justify-center mx-auto mb-6 bg-sky-300">
